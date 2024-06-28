@@ -1,0 +1,146 @@
+# .NET Core
+bin/
+obj/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+ 
+# Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+ 
+# Rider
+.idea/
+.idea/*
+ 
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+# Uncomment if necessary to ignore downloaded packages completely
+#**/packages/*
+ 
+# npm package directories
+node_modules/
+ 
+# VS Code
+.vscode/
+.vscode/*
+ 
+# User-specific files
+*.rsuser
+ 
+# Logs
+*.log
+ 
+# Local History
+.localhistory
+ 
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+ 
+# Folder config file
+Desktop.ini
+ 
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+ 
+# Windows shortcuts
+*.lnk
+ 
+# Rider
+.idea/
+.idea/*
+ 
+# JetBrains Rider
+.idea/
+ 
+# Rider project files
+.idea/
+*.sln.iml
+ 
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+ 
+# DNX
+project.lock.json
+artifacts/
+ 
+# ASP.NET
+.vscode/
+.vscode/*
+ 
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+ 
+# Mono auto generated files
+mono_crash.*
+ 
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+ 
+# Folder config file
+Desktop.ini
+ 
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+ 
+# Windows shortcuts
+*.lnk
+ 
+# JetBrains Rider
+.idea/
+ 
+# Rider project files
+.idea/
+*.sln.iml
+ 
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+ 
+# DNX
+project.lock.json
+artifacts/
+ 
+# ASP.NET
+.vscode/
+.vscode/*
+ 
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+ 
+# Mono auto generated files
+mono_crash.*
+ 
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+ 
+# Folder config file
+Desktop.ini
+ 
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+ 
+# VS Code directories
+.vscode/
+.vscode/*
+ 
+# Windows shortcuts
+*.lnk
