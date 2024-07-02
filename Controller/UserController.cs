@@ -39,7 +39,7 @@ namespace Employeemanagement.Controller
         public IActionResult AddUser(User user)
         {
             bool IsUserExist = userService.CheckUserExists(user);
-            if(!IsUserExist)
+            if (!IsUserExist)
             {
                 var data = userService.AddUser(user);
                 return Created("", data);
@@ -47,6 +47,34 @@ namespace Employeemanagement.Controller
             //Status code 409 conflict
             return Conflict("User already exist");
 
+        }
+        [HttpPatch("Update")]
+        public IActionResult UpdateUser([FromBody] User user)
+        {
+            User existingUser = userService.GetUserById(user.Id);
+            if (existingUser is null)
+            {
+                return NotFound();
+            }
+            existingUser.EmailId = user.EmailId;
+            existingUser.Name= user.Name;
+            existingUser.Password = user.Password;
+            existingUser.Role = user.Role;
+            User result = userService.UpdateUser(existingUser);
+            return Ok(result);
+        }
+
+        [HttpDelete("Delete/{Id}")]
+        public IActionResult DeleteUserById(string Id)
+        {
+            int userId = Convert.ToInt16(Id);
+            User existingUser = userService.GetUserById(userId);
+            if (existingUser is null)
+            {
+                return NotFound();
+            }
+            User result = userService.DeleteUser(existingUser);
+            return Ok(result);
         }
 
     }

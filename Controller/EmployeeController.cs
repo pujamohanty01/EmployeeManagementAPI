@@ -38,5 +38,35 @@ namespace Employeemanagement.Controller
             var data = employeeService.GetEmployeeById(userId);
             return Ok(data);
         }
+        [HttpPatch("Update")]
+        public IActionResult UpdateEmployee(Employee employee)
+        {
+            Employee existingEmployee = employeeService.GetEmployeeById(employee.Id);
+            if (existingEmployee is null)
+            {
+                return NotFound();
+            }
+            existingEmployee.Name = employee.Name;
+            existingEmployee.Salary = employee.Salary;
+            existingEmployee.Department= employee.Department;
+            existingEmployee.City = employee.City;
+
+            Employee result = employeeService.UpdateEmployee(existingEmployee);
+            return Ok(result);
+        }
+
+        [HttpDelete("Delete/{Id}")]
+        public IActionResult DeleteEmployeeById(string Id)
+        {
+            int employeeId = Convert.ToInt16(Id);
+            Employee existingEmployee = employeeService.GetEmployeeById(employeeId);
+            if (existingEmployee is null)
+            {
+                return NotFound();
+            }
+            Employee result = employeeService.DeleteEmployee(existingEmployee);
+            return Ok(result);
+        }
+
     }
 }
