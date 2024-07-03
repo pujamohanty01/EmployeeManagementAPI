@@ -12,5 +12,7 @@ namespace Employeemanagement.Service
         List<Employee> GetAllEmployee();
         Employee GetEmployeeById(int employeeId);
         bool CheckEmployeeExists(Employee employee);
+        Employee UpdateEmployee(Employee employee);
+        Employee DeleteEmployee(Employee employee);
     }
 }

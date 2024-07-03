@@ -22,7 +22,13 @@ namespace Employeemanagement.Service
         }
         public User GetUserById(int userId)
         {
-            return this.appDataContext.Users.SingleOrDefault(x => x.Id == userId);
+            var result =  this.appDataContext.Users.SingleOrDefault(x => x.Id == userId);
+
+            if(result is not null)
+            {
+            result.Password = "";
+            }
+            return result;
         }
         public User GetUserByName(string userName)
         {
@@ -41,7 +47,21 @@ namespace Employeemanagement.Service
         public User AddUser(User user)
         {
             this.appDataContext.Users.Add(user);
-             this.appDataContext.SaveChanges();
+            this.appDataContext.SaveChanges();
+            return user;
+        }
+
+        public User UpdateUser(User user)
+        {
+             this.appDataContext.Attach(user);
+            this.appDataContext.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            this.appDataContext.SaveChanges();
+            return user;
+        }
+        public User DeleteUser(User user)
+        {
+            this.appDataContext.Remove(user);
+            this.appDataContext.SaveChanges();
             return user;
         }
 

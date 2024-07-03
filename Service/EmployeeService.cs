@@ -7,31 +7,45 @@ using Employeemanagement.Model;
 
 namespace Employeemanagement.Service
 {
-    public class EmployeeService: IEmployeeService
+    public class EmployeeService : IEmployeeService
     {
-         private readonly ApplicationDataContext appDataContext;
+        private readonly ApplicationDataContext appDataContext;
         public EmployeeService(ApplicationDataContext _appDataContext)
         {
             this.appDataContext = _appDataContext;
         }
         public Employee AddEmployee(Employee employee)
         {
-           this.appDataContext.Employees.Add(employee);
-             this.appDataContext.SaveChanges();
+            this.appDataContext.Employees.Add(employee);
+            this.appDataContext.SaveChanges();
             return employee;
         }
         public List<Employee> GetAllEmployee()
         {
-              return this.appDataContext.Employees.ToList();
+            return this.appDataContext.Employees.ToList();
         }
         public Employee GetEmployeeById(int employeeId)
         {
-             return this.appDataContext.Employees.SingleOrDefault(x => x.Id == employeeId);
+            return this.appDataContext.Employees.SingleOrDefault(x => x.Id == employeeId);
         }
-         public bool CheckEmployeeExists(Employee employee)
+        public bool CheckEmployeeExists(Employee employee)
         {
             var data = this.appDataContext.Employees.SingleOrDefault(x => x.Name == employee.Name);
             return (data is not null);
+        }
+        public Employee UpdateEmployee(Employee employee)
+        {
+            this.appDataContext.Attach(employee);
+            this.appDataContext.Entry(employee).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            this.appDataContext.SaveChanges();
+            return employee;
+        }
+
+        public Employee DeleteEmployee(Employee employee)
+        {
+            this.appDataContext.Remove(employee);
+            this.appDataContext.SaveChanges();
+            return employee;
         }
     }
 }
