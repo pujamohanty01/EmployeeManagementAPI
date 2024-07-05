@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Employeemanagement.Service;
 using Employeemanagement.Model;
+using Employeemanagement.Data;
 
 namespace Employeemanagement.Controller
 {
@@ -8,10 +9,14 @@ namespace Employeemanagement.Controller
     [ApiController]
     public class UserController : ControllerBase
     {
+
+        private readonly JwtTokenHandler jwtTokenHandler;
         private readonly IUserService userService;
-        public UserController(IUserService _userService)
+        public UserController(IUserService _userService, JwtTokenHandler _jwtTokenHandler)
         {
             userService = _userService;
+            this.jwtTokenHandler = _jwtTokenHandler;
+         
         }
 
         [HttpGet("GetUsers")]
@@ -33,6 +38,10 @@ namespace Employeemanagement.Controller
         public IActionResult LogIn(string userName, string password)
         {
             var data = userService.VerifyCredential(userName, password);
+            if(data is null){
+                return Unauthorized();
+            }
+            data.Password = jwtTokenHandler.GeneratJwtToken(data);
             return Ok(data);
         }
         [HttpPost]
@@ -57,7 +66,7 @@ namespace Employeemanagement.Controller
                 return NotFound();
             }
             existingUser.EmailId = user.EmailId;
-            existingUser.Name= user.Name;
+            existingUser.Name = user.Name;
             existingUser.Password = user.Password;
             existingUser.Role = user.Role;
             User result = userService.UpdateUser(existingUser);
@@ -76,6 +85,7 @@ namespace Employeemanagement.Controller
             User result = userService.DeleteUser(existingUser);
             return Ok(result);
         }
+       
 
     }
 }

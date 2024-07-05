@@ -1,16 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using Employeemanagement.Service;
 using Employeemanagement.Model;
+using Microsoft.AspNetCore.Authorization;
+
 namespace Employeemanagement.Controller
 {
+    [Authorize(Roles ="Admin")]
     [Route("api/Employee")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService employeeService;
+        
         public EmployeeController(IEmployeeService _employeeService)
         {
             employeeService = _employeeService;
+           
         }
 
         [HttpGet("GetEmployees")]
